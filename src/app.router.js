@@ -38,6 +38,7 @@ class AppRouter extends React.Component {
     render() {
         // const { user, initInfoState } = this.props;
        // if (this.props.isLoginSuccess === false) {
+          
             return (
                 <Switch>
                     <Route exact path="/" render={() => <Demo />} />
@@ -45,6 +46,7 @@ class AppRouter extends React.Component {
                     <Route component={NotFound} /> {/* in this component we check the loglin*/}
                 </Switch>
             )
+
         // } else if (this.props.isLoginSuccess === true && initInfoState) {
         //     return (
         //         <Switch>

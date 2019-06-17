@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 
 // import Header from './01.Partial/Header'
-import { store } from "./app.store";
+import { store } from "./app.store&middleware";
 import AppRouter from "./app.router";
 // import './../../style.css'
 
