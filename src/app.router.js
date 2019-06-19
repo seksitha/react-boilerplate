@@ -4,10 +4,10 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from "redux";
 
 import { dispatcher } from './app.utils';
-import NotFound from './app.components/app.notFound'
-import Demo from './app.components/demo'
+import NotFound from './app.partials/app.notFound'
+import Demo from './app.partials/demo'
 
-import RecipeReviewCard from './app.components/card'
+import RecipeReviewCard from './app.partials/card'
 
 
 
@@ -38,7 +38,7 @@ class AppRouter extends React.Component {
     render() {
         // const { user, initInfoState } = this.props;
        // if (this.props.isLoginSuccess === false) {
-          
+
             return (
                 <Switch>
                     <Route exact path="/" render={() => <Demo />} />
