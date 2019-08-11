@@ -1,13 +1,13 @@
 import React from 'react'
-import { withRouter, Switch, Route, Redirect } from 'react-router-dom'
+import { withRouter, Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from "redux";
 
 import { dispatcher } from './app.utils';
-import NotFound from './app.partials/app.notFound'
-import Demo from './app.partials/demo'
+// import NotFound from './app.partials/app.notFound'
 
-import RecipeReviewCard from './app.partials/card'
+
+import ProductListingContainer from './product.listing/product.listing.controllers/product.listing.container'
 
 
 
@@ -16,22 +16,23 @@ class AppRouter extends React.Component {
         this.props.dispatcher('$$mw-POST_LOGIN', val)
     }
     handleload = e => {
-        const confirmationMessage = 'helo worl';
+        const confirmationMessage = 'hello world';
         e.returnValue = confirmationMessage;     // Gecko, Trident, Chrome 34+
         return confirmationMessage;
     }
-    componentDidMount() {
-        // setInterval(()=>this.props.dispatcher('$$mw-UPLOAD-DATA', {}),1000*60*60);
-        // (!Object.keys(this.props.user).length) && this.props.dispatcher('$$mw-JUST_TO_RUN_MW', this.props.user);
-        //console.log(this.props)
+    componentDidMount() {		
+        const { location, match: { params } } = this.props
+        this.props.dispatcher('$$mw-ROUTE_ON_CHANGE', { location, params });
+
     }
-
-    componentWillUpdate(nextProps) {
-      
-        const { location, match: { params } } = nextProps
+    getSnapshotBeforeUpdate(prevProps, prevState) {
+        const { location, match: { params } } = this.props;
+        // console.log(location,params)
+        this.props.dispatcher('$$mw-ROUTE_ON_CHANGE', { location, params })
+        return null;
         
-        // this.props.dispatcher('$$mw-ROUTE_ON_CHANGE', { location, params })
-
+    }
+    componentDidUpdate(nextProps) {
 
     }
 
@@ -41,9 +42,10 @@ class AppRouter extends React.Component {
 
             return (
                 <Switch>
-                    <Route exact path="/" render={() => <Demo />} />
-                    <Route exact path="/card" render={() => <RecipeReviewCard propsme = {this.props}  />} />
-                    <Route component={NotFound} /> {/* in this component we check the loglin*/}
+                    <Route exact path="/" render={() => <ProductListingContainer {...this.porps}/>} />
+                    <Route exact path="/items" render={() => <ProductListingContainer propsme = {this.props}  />} />
+                    {/* <Route exact path="/single" render={() => <RecipeReviewCard propsme = {this.props}  />} /> */}
+                    {/* <Route component={NotFound} /> in this component we check the loglin */}
                 </Switch>
             )
 
@@ -85,9 +87,9 @@ const mapStateToProps = (props) => { // this is the props that pass to component
         ...props
     }
 };
-// const dispatchAction = (type,data)=>({type:type,payload:data})
+
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators({ dispatcher }, dispatch); // resquestApiData is the actionCreator
+    return bindActionCreators({ dispatcher }, dispatch); 
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AppRouter));

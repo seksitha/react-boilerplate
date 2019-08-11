@@ -3,13 +3,16 @@ import { combineReducers } from 'redux'
 import rootSaga from './app.saga' // does saga has reducer?
 import { appReducer } from './app.reducer'
 import createSagaMiddleware from 'redux-saga'
-import {middleWare} from './app.middleWare/app.middleware'
+import {middleWare} from './app.middleware'
+import {productListingMiddleWare} from './product.listing/product.listing.controllers/product.listing.middleware'
+import {productListingReducer} from './product.listing/product.listing.models/product.listing.reducer'
 
 const reduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 const sagaMiddleware = createSagaMiddleware(); // define saga
 
 const  createReducer= combineReducers({
-	reducer: appReducer,
+    appReducer,
+    productListingReducer
 })
 
 const rootReducer = (store, action) => {
@@ -21,7 +24,9 @@ createStore(
 	rootReducer, // new root reducer with router state, 
 	compose(
 		applyMiddleware(
-			middleWare
+            middleWare,
+            sagaMiddleware,
+            productListingMiddleWare
 		), 
 		reduxDevTools
 	), // mount saga to store before run
@@ -32,10 +37,12 @@ createStore(
 	//loadData(ormModel),
 	compose(
 		applyMiddleware(
-			sagaMiddleware, middleWare
+            sagaMiddleware, 
+            middleWare,
+            productListingMiddleWare
 		)
 	), // mount saga to store before run
 )
 
-// sagaMiddleware.run(rootSaga) // initiate saga
+sagaMiddleware.run(rootSaga) // initiate saga
 

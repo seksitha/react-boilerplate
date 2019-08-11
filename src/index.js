@@ -4,11 +4,9 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "@material-ui/styles";
 import { createMuiTheme } from "@material-ui/core/styles";
-
-// import Header from './01.Partial/Header'
 import { store } from "./app.store&middleware";
 import AppRouter from "./app.router";
-import Header from "./app.partials/app.header";
+import Header from "./app.partials/app.header/header";
 // import './../../style.css'
 // import getMuiTheme from 'material-ui/styles/getMuiTheme';
 // import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';

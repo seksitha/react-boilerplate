@@ -19,9 +19,9 @@ export const trottle = () => { //single call if the same value stay true
        // true many time
        if (state !== inerState) {
            inerState = state;
-           return true
+           return false
        }
-       return false
+       return true
    }
 }
 
