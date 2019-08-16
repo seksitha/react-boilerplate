@@ -2,7 +2,7 @@ import React from 'react'
 import { withRouter, Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from "redux";
-
+import Header from "./app.partials/app.header/header";
 import { dispatcher } from './app.utils';
 // import NotFound from './app.partials/app.notFound'
 
@@ -41,12 +41,15 @@ class AppRouter extends React.Component {
        // if (this.props.isLoginSuccess === false) {
 
             return (
-                <Switch>
-                    <Route exact path="/" render={() => <ProductListingContainer {...this.porps}/>} />
-                    <Route exact path="/items" render={() => <ProductListingContainer propsme = {this.props}  />} />
-                    {/* <Route exact path="/single" render={() => <RecipeReviewCard propsme = {this.props}  />} /> */}
-                    {/* <Route component={NotFound} /> in this component we check the loglin */}
-                </Switch>
+                <React.Fragment>
+                    <Header navstate={this.props.appReducer.navState} />
+                    <Switch>
+                        <Route exact path="/" render={() => <ProductListingContainer {...this.porps}/>} />
+                        <Route exact path="/items" render={() => <ProductListingContainer propsme = {this.props}  />} />
+                        {/* <Route exact path="/single" render={() => <RecipeReviewCard propsme = {this.props}  />} /> */}
+                        {/* <Route component={NotFound} /> in this component we check the loglin */}
+                    </Switch>
+                </React.Fragment>
             )
 
         // } else if (this.props.isLoginSuccess === true && initInfoState) {

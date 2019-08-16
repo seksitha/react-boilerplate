@@ -2,7 +2,6 @@ import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -16,11 +15,12 @@ import SvgIcon from "@material-ui/core/SvgIcon";
 import { useStyles } from "./header.style";
 
 import MenuTabs from "./header.menu";
-
-export default function Header(props) {
+import Link from "@material-ui/core/Link";
+import { Link as RouterLink } from "react-router-dom";
+export default function Header(props) { // functinal component use react hook to minipulate state
 	const classes = useStyles();
-	const [anchorEl, setAnchorEl] = React.useState(null);
-	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+	const [anchorEl, setAnchorEl] = React.useState(null); // hook AnchorEl
+	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null); // hook MobileMoreAnchorEl
 
 	const isMenuOpen = Boolean(anchorEl);
 	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -50,17 +50,20 @@ export default function Header(props) {
 			<AppBar className={classes.appBar} position="static">
 				{/* <AppBar color="default" position="static"> */}
 				<Toolbar>
-					<Typography
+					<Link
+						component={RouterLink}
+						to="/"
 						color="secondary"
 						className={classes.title}
 						variant="h6"
 						noWrap
 					>
 						SHOPMATE
-					</Typography>
+					</Link>
+
 					{/* this div take up the free front space */}
 					<div className={classes.grow} />
-					<MenuTabs navSelected={2} />
+
 
 					{/* Search box */}
 					<div className={classes.search}>
@@ -79,8 +82,9 @@ export default function Header(props) {
 
 					{/* desktop icons */}
 					<div className={classes.sectionDesktop}>
+                    					{/* this is nav button for department */}
+					    <MenuTabs navstate={props.navstate} />
 						<IconButton
-							
 							aria-label="Account of current user"
 							aria-controls={menuId}
 							aria-haspopup="true"
@@ -98,7 +102,11 @@ export default function Header(props) {
 								</SvgIcon>
 							</Badge>
 						</IconButton>
-						<IconButton edge="end" aria-label="Show 17 new notifications" color="inherit">
+						<IconButton
+							edge="end"
+							aria-label="Show 17 new notifications"
+							color="inherit"
+						>
 							<Badge badgeContent={17} color="secondary">
 								<SvgIcon {...props}>
 									<path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" />

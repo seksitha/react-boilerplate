@@ -8,10 +8,10 @@ import {
 
 export function* getDataAsync(action) {                                            // function get call is here
 
-    const { payload: { url, typeOnSuccess } } = action
+    const { payload: { url, typeOnSuccess, relayData } } = action
     try {
         const { data } = yield call(axios.get, url) // getInfo/sale/saleType/saleTable
-        yield put(dispatcher(typeOnSuccess, { data }))
+        yield put(dispatcher(typeOnSuccess, { data, relayData }))
         //if(sales.data.length)yield put(dispatcher('$$ui-SET_PAGE', data.length,'saga'));
 
     } catch (e) {

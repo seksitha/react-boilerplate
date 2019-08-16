@@ -6,7 +6,7 @@ import { ThemeProvider } from "@material-ui/styles";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { store } from "./app.store&middleware";
 import AppRouter from "./app.router";
-import Header from "./app.partials/app.header/header";
+
 // import './../../style.css'
 // import getMuiTheme from 'material-ui/styles/getMuiTheme';
 // import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
@@ -33,7 +33,18 @@ const theme = createMuiTheme({
    },
    text:{
       textColor: 'Yellow'
-   }
+   },
+   typography: {
+    fontFamily: [,
+      'Montserrat',
+      '"Montserrat-bold"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+  },
 });
 export default class App extends React.Component {
 	render() {
@@ -42,7 +53,6 @@ export default class App extends React.Component {
 				<ThemeProvider theme={theme}>
 					<Router>
 						<div className="container-fluid">
-							<Header />
 							<AppRouter /> {/* this component check the loglin */}
 						</div>
 					</Router>

@@ -30,25 +30,20 @@ const useStyles = makeStyles(theme => ({
 
 export default function MenuTabs(props) {
 	const classes = useStyles();
-	const [value, setValue] = React.useState(0);
-
-	function handleChange(event, newValue) {
-      setValue(newValue);
-	}
-
+    // console.log(props)
 	return (
 		<Tabs
-			className={clsx([classes.root])}
-			value={value}
-			onChange={handleChange}
+            className={clsx([classes.root])}
+            // value is used to set hightligh under nav
+            value={props.navstate} 
          // variant="fullWidth"
          // indicatorColor = "white"
          // textColor = "white"
 		>
 			
-            <Tab className={clsx( props.navSelected === 0 && classes.bar)} component={Link} to={{pathname: "/items", search:"?department=1"}} label="Original" />
-			<Tab className={clsx( props.navSelected === 1 && classes.bar)} component={Link} to={{pathname: "/items", search:"?department=2"}}  label="Nature" />
-			<Tab className={clsx( props.navSelected === 2 && classes.bar)} component={Link} to={{pathname: "/items", search:"?department=3"}}  label="Seasonal" />
+            <Tab className={clsx( props.navstate === 0 && classes.bar)} component={Link} to={{pathname: "/items", search:"?department_id=1"}} label="Original" />
+			<Tab className={clsx( props.navstate === 1 && classes.bar)} component={Link} to={{pathname: "/items", search:"?department_id=2"}}  label="Nature" />
+			<Tab className={clsx( props.navstate === 2 && classes.bar)} component={Link} to={{pathname: "/items", search:"?department_id=3"}}  label="Seasonal" />
 		</Tabs>
 	);
 }

@@ -28,7 +28,7 @@ createStore(
             sagaMiddleware,
             productListingMiddleWare
 		), 
-		reduxDevTools
+		// reduxDevTools
 	), // mount saga to store before run
 )
 :
